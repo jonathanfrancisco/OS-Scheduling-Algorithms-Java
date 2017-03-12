@@ -13,3 +13,4 @@ Note: All of the algorithms are based on OOP but they don't have any setters or 
 - [ ] Priority Scheduling (Preemptive)
 - [ ] Round-Robin Scheduling (RR)
 
+Will be adding the other algorithms soon.
