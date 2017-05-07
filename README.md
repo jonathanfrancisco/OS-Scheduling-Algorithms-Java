@@ -6,7 +6,7 @@ Note: All of the algorithms are based on OOP but they don't have any setters or 
 
 # This Repository Contains The Following Algorithms:
 
-- [ ] First Come First Serve (FCFS)
+- [x] First Come First Serve (FCFS)
 - [x] Shortest Job First (SJF)
 - [x] Shortest Remaining Time First(SRTF)
 - [ ] Priority Scheduling (Non-Preemptive)
