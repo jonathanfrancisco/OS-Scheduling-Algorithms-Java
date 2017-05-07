@@ -9,8 +9,8 @@ Note: All of the algorithms are based on OOP but they don't have any setters or 
 - [x] First Come First Serve (FCFS)
 - [x] Shortest Job First (SJF)
 - [x] Shortest Remaining Time First(SRTF)
-- [ ] Priority Scheduling (Non-Preemptive)
-- [ ] Priority Scheduling (Preemptive)
+- [x] Priority Scheduling (Non-Preemptive)
+- [x] Priority Scheduling (Preemptive)
 - [ ] Round-Robin Scheduling (RR)
 
 Will be adding the other algorithms soon.
