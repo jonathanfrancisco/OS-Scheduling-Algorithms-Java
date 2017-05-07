@@ -1,0 +1,101 @@
+import java.util.*;
+
+
+
+public class Priority{
+	public static void main(String[]args){
+		
+		
+		Scanner input = new Scanner(System.in);
+		ArrayList<Process> processList = new ArrayList<Process>();
+		ArrayList<Process> readyQueue = new ArrayList<Process>();
+		
+		int totalTime = 0;
+		for(int i = 0;i<4;i++) {
+
+			System.out.print("ARRIVAL TIME for P"+i+": ");
+			int arrivalTime = input.nextInt();
+			System.out.print("BURST TIME for P"+i+": ");
+			int burstTime = input.nextInt();
+			System.out.print("PRIORITY for P"+i+": ");
+			int priority = input.nextInt();
+			
+			totalTime += burstTime;
+	
+			processList.add(new Process("P"+i, arrivalTime, burstTime, priority));
+
+		}
+		
+
+		Process selectedProcess = null;
+		boolean aProcessIsCurrentlyExecuting = false;
+		
+		
+		for(int time = 0;time <= totalTime; time++) { // START OF TIME LOOP
+			
+			for(Process process: processList){
+				if(process.arrivalTime == time) {
+					readyQueue.add(process);
+				}
+				
+			}
+			
+			if(!aProcessIsCurrentlyExecuting && !readyQueue.isEmpty()) {
+				
+				if(readyQueue.size()>1) {
+					int high = 0;
+					for(int i = 0;i<readyQueue.size();i++) {
+						if(readyQueue.get(i).priority>high) {
+							selectedProcess = readyQueue.get(i);
+							high = selectedProcess.priority;
+							aProcessIsCurrentlyExecuting = true;
+						}
+					}
+				}
+				else {
+					selectedProcess = readyQueue.get(0);
+					aProcessIsCurrentlyExecuting = true;
+				}
+			}
+			
+
+			if(selectedProcess !=null) {
+				selectedProcess.burstTime--; 
+			}
+			
+			for(Process process: processList) {
+				if(!process.isDone) {
+					process.completionTime++;
+				}
+			}
+			
+			if(selectedProcess!=null && selectedProcess.burstTime==0) {
+				selectedProcess.isDone = true;
+				selectedProcess.turnAroundTime = selectedProcess.completionTime - selectedProcess.arrivalTime;
+				selectedProcess.waitTime = selectedProcess.turnAroundTime - selectedProcess.originalBurstTime;
+				aProcessIsCurrentlyExecuting = false;
+				readyQueue.remove(selectedProcess);
+			}
+			
+			
+		} // END OF TIME LOOP
+		
+		double waitTimeSum = 0;
+		
+		System.out.println("ID     AT     BT     WT     TT");
+		
+		for(Process process: processList) {
+            System.out.println(process.processID+"      "
+                               +process.arrivalTime+"      "
+                               +process.originalBurstTime+"     "
+                               +process.waitTime+"     "
+                               +process.turnAroundTime);
+           waitTimeSum += process.waitTime;
+          
+        }
+
+        System.out.println("Average waiting time is: "+waitTimeSum/processList.size());
+		
+
+	}
+}

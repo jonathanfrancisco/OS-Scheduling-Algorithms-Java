@@ -1,0 +1,69 @@
+
+public class Process {
+	
+	private String processID;
+	private int arrivalTime;
+	private int burstTime;
+	private int priority;
+	
+	private int waitTime;
+	private int turnAroundTime;
+	private int completionTime;
+	
+	public Process(String processID, int arrivalTime, int burstTime, int priority) {
+		this.processID = processID;
+		this.arrivalTime = arrivalTime;
+		this.burstTime = burstTime;
+		this.priority = priority;
+	}
+
+	public String getProcessID() {
+		return processID;
+	}
+
+	
+	public int getArrivalTime() {
+		return arrivalTime;
+	}
+
+	
+	public int getBurstTime() {
+		return burstTime;
+	}
+
+	
+
+	public int getPriority() {
+		return priority;
+	}
+
+
+	public int getWaitTime() {
+		return waitTime;
+	}
+
+	public void setWaitTime(int waitTime) {
+		this.waitTime = waitTime;
+	}
+	
+	public int getCompletionTime() {
+		return completionTime;
+	}
+	
+	public void setCompletionTime(int completionTime) {
+		this.completionTime = completionTime;
+	}
+
+	public int getTurnAroundTime() {
+		return turnAroundTime;
+	}
+
+	public void setTurnAroundTime(int turnAroundTime) {
+		this.turnAroundTime = turnAroundTime;
+	}
+	
+	
+	
+	
+
+}

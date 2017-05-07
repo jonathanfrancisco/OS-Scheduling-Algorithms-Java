@@ -1,0 +1,96 @@
+import java.util.*;
+
+public class Priority {
+	
+	private static ArrayList<Process> processList = new ArrayList<Process>();
+	private static Scanner input = new Scanner(System.in);
+	
+	public static void main (String[]args) {
+		
+		for(int i = 0;i<4;i++) {
+			
+			System.out.print("ARRIVAL TIME for P"+i+": ");
+			int arrivalTime = input.nextInt();
+			System.out.print("BURST TIME for P"+i+": ");
+			int burstTime = input.nextInt();
+			System.out.print("PRIORITY for P"+i+": ");
+			int priority = input.nextInt();
+	
+			processList.add(new Process("P"+i, arrivalTime, burstTime, priority));
+			
+		}
+		
+		doSomeMagic();
+		
+		int executionTime = processList.get(0).getArrivalTime();
+		
+		for(Process proc: processList) {
+			
+			if(executionTime - proc.getArrivalTime() < 0) {
+				proc.setWaitTime(0);
+			}
+			
+			else {
+				proc.setWaitTime(executionTime-proc.getArrivalTime());
+			}
+			
+			System.out.println("Execution time of "+proc.getProcessID()+" is "+executionTime);
+			System.out.println("Arrival time of "+proc.getArrivalTime()+" is "+proc.getArrivalTime());
+			
+			executionTime += proc.getBurstTime();
+			
+			/////////////////////////////////
+			proc.setCompletionTime(executionTime);
+			System.out.println("Completion time of "+proc.getProcessID()+" is "+proc.getCompletionTime());
+			proc.setTurnAroundTime(proc.getCompletionTime()-proc.getArrivalTime());
+
+		}
+		
+		print();
+		
+	}
+	
+	private static void doSomeMagic() {
+		
+		// SORT BY BURST TIME
+		for(int i = 0;i<processList.size();i++) {
+			for(int j = 0;j<processList.size()-1;j++){
+				Process p1 = processList.get(j);
+				Process p2 = processList.get(j+1);
+				if(p1.getPriority()<p2.getPriority()) {
+					Process temp = p1;
+					processList.set(j, p2);
+					processList.set(j+1, temp);
+				}
+			}
+		}
+		
+		// GET THE LOWEST ARRIVALTIME
+		int indexOfFirst = 0;
+		int currentMin = processList.get(0).getArrivalTime();
+		
+		for(int i = 1;i<processList.size();i++) {
+			if(currentMin>processList.get(i).getArrivalTime()) {
+				currentMin = processList.get(i).getArrivalTime();
+				indexOfFirst = i;
+			}
+		}
+		
+		// PUT DA SHT AS FIRST ONE TO EXECUTE
+		Process firstExecute  = processList.remove(indexOfFirst);
+		processList.add(0,firstExecute);
+		
+	}
+	
+	private static void print() {
+		
+		System.out.println("ID     arrivalTime   burstTime  priority    waitTime    turnAroundTime");
+		
+		for(Process i: processList) {
+			System.out.println(i.getProcessID()+"         "+i.getArrivalTime()+"           "+i.getBurstTime()+"          "+i.getPriority()+"           "+i.getWaitTime()+"              "+i.getTurnAroundTime());
+		}
+		
+	}
+	
+	
+}

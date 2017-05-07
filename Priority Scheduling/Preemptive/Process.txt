@@ -1,0 +1,31 @@
+public class Process  {
+
+    String processId;
+
+    int arrivalTime;
+    int originalarrivalTime;
+
+
+    int burstTime;
+    int originalBurstTime;
+
+    int waitTime;
+
+    int completionTime;
+    int turnAroundTime;
+    
+    int priority;
+
+    boolean isDone = false;
+
+    public Process(String processId, int arrivalTime, int burstTime, int priority) {
+
+        this.processId = processId;
+        this.arrivalTime = arrivalTime;
+        this.burstTime = burstTime;
+        this.priority = priority;
+        
+    }
+
+
+}
